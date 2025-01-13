@@ -12,5 +12,6 @@ setup(
     author = 'Thomas Winckelman',
     author_email = 'winckelman@tamu.edu',
     description = 'Answers to the exercises in labs_680 with improved package structure',
-    packages = find_packages()
+    packages = find_packages(),
+    include_package_data = True # ~~~ include the `.npy` file
 )
