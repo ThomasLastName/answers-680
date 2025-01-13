@@ -6,12 +6,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = 'package_name',
-    version = '1.2.0',
-    url = 'https://github.com/ThomasLastName/slug',
+    name = 'answers_680',
+    version = '1.0.0',
+    url = 'https://github.com/ThomasLastName/answers-680',
     author = 'Thomas Winckelman',
     author_email = 'winckelman@tamu.edu',
-    description = 'Description of my package',
-    packages = find_packages(),    
-    install_requires = ["pyreadr"]    # ~~~ when you pip install `package_name`, pip will also install `pyreadr`
+    description = 'Answers to the exercises in labs_680 with improved package structure',
+    packages = find_packages()
 )
