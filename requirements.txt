@@ -3,7 +3,7 @@ scipy
 matplotlib
 tqdm
 scikit-learn
-pytorch
+torch
 cvxpy
 ecos
 quality_of_life @ git+https://github.com/ThomasLastName/quality-of-life.git
