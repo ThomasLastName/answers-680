@@ -2,7 +2,7 @@ numpy
 scipy
 matplotlib
 tqdm
-sklearn
+scikit-learn
 pytorch
 cvxpy
 ecos
