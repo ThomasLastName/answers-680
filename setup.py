@@ -13,5 +13,6 @@ setup(
     author_email = 'winckelman@tamu.edu',
     description = 'Answers to the exercises in labs_680 with improved package structure',
     packages = find_packages(),
-    include_package_data = True # ~~~ include the `.npy` file
+    include_package_data = True,    # ~~~ include certain files other than `.py` files
+    package_data={"answers_680": ["*.npy"]}    # ~~~ speicifically, include `.npy` files in the folder "answers_680"
 )
