@@ -165,6 +165,7 @@ def empirical_risk_minimization_with_linear_H( x_train, y_train, list_of_functio
 def my_univar_poly_fit( x_train, y_train, degree, penalty=None ):
     monomials = [ (lambda x,j=j: x**j) for j in range(int(degree)+1) ]   # ~~~ define a list of functions which span the hypothesis class, in this case [ 1, x , x^2, ..., x^degree ]
     basis_for_H = monomials[::-1]   # ~~~ reverse the order in which they're listed; this is merely a convention adopted to be consistent with the convention used by np.polyfit
+    # basis_for_H = [ np.polynomial.chebyshev.Chebyshev.basis(i) for i in range(int(degree)+1) ]    # ~~~ identical results but more numerically stable!
     return empirical_risk_minimization_with_linear_H( x_train, y_train, basis_for_H, ell_2_penalization_parameter=penalty )     # ~~~ that's it!
 
 #
