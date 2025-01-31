@@ -5,6 +5,18 @@ import numpy as np
 from matplotlib import pyplot as plt
 from quality_of_life.my_numpy_utils import augment
 
+#
+# ~~~ Extra featuers if you have cvxpy
+try:
+    import cvxpy as cvx
+    use_cvx = True
+except Exception as probably_ModuleNotFoundError:
+    if type(probably_ModuleNotFoundError) is ModuleNotFoundError:
+        use_cvx = False
+    else:
+        raise
+
+
 ### ~~~
 ## ~~~ Dependencies
 ### ~~~
@@ -96,3 +108,15 @@ def training_data_to_feasibility_parameters(X_train,y_train):
     A = augment(X_train) * y_train[:, np.newaxis]
     b = np.ones((A.shape[0],1))
     return A,b
+
+#
+# ~~~ Almost identical to `linear_feasibility_program` in week_2_680.py; just change the objective function
+def optimization_problem_for_hard_svm( A, b, solver=cvx.ECOS ):
+    m,n = A.shape               # ~~~ get the number of rows and columns of A
+    assert b.shape==(m,1)       # ~~~ safety feature
+    x = cvx.Variable((n,1))     # ~~~ define the optimization variable x
+    constraints = [A @ x >= b]  # ~~~ define the constraints of the problem
+    objective = cvx.Minimize(cvx.norm(x,2))         # ~~~ equation (4.3) in the text
+    problem = cvx.Problem(objective, constraints)   # ~~~ put it all together into a complete minimization program
+    problem.solve(solver=solver)                    # ~~~ try to solve it
+    return x.value if problem.status==cvx.OPTIMAL else None
