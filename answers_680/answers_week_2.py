@@ -105,7 +105,7 @@ class HalfSpaceClassifier:
 
 def training_data_to_feasibility_parameters(X_train,y_train):
     assert set(y_train)=={-1,1}
-    A = augment(X_train) * y_train[:, np.newaxis]
+    A = augment(X_train,negative=True) * y_train[:, np.newaxis]
     b = np.ones((A.shape[0],1))
     return A,b
 
