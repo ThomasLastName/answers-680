@@ -13,7 +13,7 @@ def txt_to_list(filepath):
 
 setup(
     name = 'answers_680',
-    version = '1.1.0',
+    version = '1.1.1',
     url = 'https://github.com/ThomasLastName/answers-680',
     author = 'Thomas Winckelman',
     author_email = 'winckelman@tamu.edu',
