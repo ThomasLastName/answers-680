@@ -18,7 +18,7 @@ except Exception as probably_ModuleNotFoundError:
 ## ~~~ Actually, this code doesn't quite work as I'd hoped, and I haven't really tried to fix it. I'm just hiding it here indefinitely
 ### ~~~
 
-def LASSO( A, b, lam=0, solver=cvx.ECOS ):
+def LASSO( A, b, lam=0, solver=cvx.SCS ):
     m,n = A.shape           # ~~~ get the number of rows and columns of A
     assert b.shape==(m,1)   # ~~~ safety feature
     x = cvx.Variable((n,1)) # ~~~ define the optimization variable x
@@ -28,7 +28,7 @@ def LASSO( A, b, lam=0, solver=cvx.ECOS ):
     return x.value if problem.status==cvx.OPTIMAL else None
 
 
-def SLASSO( A, b, lam=0, solver=cvx.ECOS ):
+def SLASSO( A, b, lam=0, solver=cvx.SCS ):
     m,n = A.shape           # ~~~ get the number of rows and columns of A
     assert b.shape==(m,1)   # ~~~ safety feature
     x = cvx.Variable((n,1)) # ~~~ define the optimization variable x
@@ -52,7 +52,7 @@ def LASSO_polyfit( x_train, y_train, degree=1, lam=0, squared_ell1=True, solver=
     assert m==len(x_train)==len(y_train)
     assert n==degree+1
     coeffs = SLASSO( model_matrix, y_train, lam, solver ) if squared_ell1 else LASSO( model_matrix, y_train, lam, solver )
-    return coeffs.flatten()[::-1]
+    return coeffs.flatten()
 
 
 # #
