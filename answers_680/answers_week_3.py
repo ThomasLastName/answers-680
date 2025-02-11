@@ -1,6 +1,7 @@
 
 # ~~~ Tom Winckelman wrote this; maintained at: https://github.com/ThomasLastName/answers_680
 
+import numpy as np
 
 #
 # ~~~ Extra featuers if you have cvxpy
