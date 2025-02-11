@@ -40,7 +40,7 @@ def SLASSO( A, b, lam=0, solver=cvx.SCS ):
 
 
 
-def LASSO_polyfit( x_train, y_train, degree=1, lam=0, squared_ell1=True, solver=cvx.ECOS ):
+def LASSO_polyfit( x_train, y_train, degree=1, lam=0, squared_ell1=True, solver=cvx.SCS ):
     #
     # ~~~ Shape coercion
     y_train = y_train.reshape(-1,1)
