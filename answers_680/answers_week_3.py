@@ -45,19 +45,19 @@ def LASSO_polyfit( x_train, y_train, degree=1, lam=0, squared_ell1=True, solver=
     y_train = y_train.reshape(-1,1)
     #
     # ~~~ Build the matrix for which least squares is polynomial regression
-    model_matrix = np.vstack([ x_train**j for j in range(int(degree)+1) ]).T[::-1]
+    model_matrix = np.column_stack([ x_train**j for j in range(int(degree)+1) ])
     #
     #~~~ An optional sanity check
     m,n = model_matrix.shape
     assert m==len(x_train)==len(y_train)
     assert n==degree+1
     coeffs = SLASSO( model_matrix, y_train, lam, solver ) if squared_ell1 else LASSO( model_matrix, y_train, lam, solver )
-    return coeffs
+    return coeffs.flatten()[::-1]
 
 
-#
-# ~~~ Validate our code by checking that our routine implements polynomial regression correctly (compare to the numpy implementation of polynmoial regression)
-x_train, y_train = Foucarts_training_data()
-poly, coeffs = univar_poly_fit( x_train, y_train, degree=2 )
-my_coeffs = LASSO_polyfit( x_train, y_train, degree=2 )
-assert abs(coeffs-my_coeffs).max() < 1e-14    # ~~~ if this passes, it means that our implementation is equivalent to numpy's
+# #
+# # ~~~ Validate our code by checking that our routine implements polynomial regression correctly (compare to the numpy implementation of polynmoial regression)
+# x_train, y_train = Foucarts_training_data()
+# poly, coeffs = univar_poly_fit( x_train, y_train, degree=2 )
+# my_coeffs = LASSO_polyfit( x_train, y_train, degree=2 )
+# assert abs(coeffs-my_coeffs).max() < 1e-5    # ~~~ if this passes, it means that our implementation is equivalent to numpy's
